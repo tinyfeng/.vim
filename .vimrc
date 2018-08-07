@@ -132,8 +132,8 @@ let g:ycm_collect_identifiers_from_comments_and_strings = 0
 
 
 " 为了ruby 编程方便,_ -相互替换
-inoremap - _
-inoremap _ -
+" inoremap - _
+" inoremap _ -
 
 " ;ag 全局搜索文本
 nnoremap <leader>ag :Ag 
