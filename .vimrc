@@ -7,17 +7,25 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-" Plugin 'VundleVim/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-" Plugin 'tpope/vim-fugitive'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'tpope/vim-fugitive'
+" Plugin 'Valloric/YouCompleteMe'
+Plugin 'rking/ag.vim'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
-" Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'kien/ctrlp.vim'
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-pathogen'
+Plugin 'rstacruz/sparkup'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'majutsushi/tagbar'
 " git repos on your local machine (i.e. when working on your own plugin)
 " Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
@@ -97,17 +105,21 @@ set hlsearch
 set cursorcolumn
 set cursorline
 
+" 按下ctrl键 +j或者k，快速上下移动
 nnoremap <C-j> 5j
 nnoremap <C-k> 5k
 
+" 在换行的一行中上下移动
 nnoremap j gj
 nnoremap k gk
-let g:neocomplete#enable_at_startup = 0
+let g:neocomplete#enable_at_startup = 1
 
+" 高亮所在列
 highlight CursorColumn cterm=NONE ctermbg=yellow guibg=NONE guifg=NONE 
 " ctermfg=green 
 
 let mapleader=";"
+" ;sh 跳转到shell，输入exit回到vim
 nnoremap <leader>sh :sh<cr>
 
 let g:ycm_seed_identifiers_with_syntax=1
@@ -118,13 +130,22 @@ let g:ycm_complete_in_strings = 1
 "注释和字符串中的文字也会被收入补全
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
 
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> " 跳转到定义处
-nnoremap <leader>ag :Ag 
+
+" 为了ruby 编程方便,_ -相互替换
 inoremap - _
 inoremap _ -
+
+" ;ag 全局搜索文本
+nnoremap <leader>ag :Ag 
+" ;ff ctrlp查找文件
 map <leader>ff <C-p>
+" ;q 强制退出
 map <leader>q :q!<cr>
+" ;w 保存
 map <leader>w :w!<cr>
+" ;W 保存并退出
 map <leader>W :wq!<cr>
+" ;Q 退出全部窗口
 map <leader>Q :qa!<cr>
+" ;e 保存只读文件
 map <leader>ww :w !sudo tee %<cr>
