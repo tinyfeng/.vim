@@ -132,11 +132,14 @@ let g:ycm_collect_identifiers_from_comments_and_strings = 0
 
 
 " 为了ruby 编程方便,_ -相互替换
-inoremap - _
-inoremap _ -
+autocmd Filetype ruby call SetRubyOptions()
+function SetRubyOptions()
+    inoremap <buffer> - _
+    inoremap <buffer> _ -
+endfunction
 
 " ;ag 全局搜索文本
-nnoremap <leader>ag :Ag 
+nnoremap <leader>ag :Ag ""<Left>
 " ;ff ctrlp查找文件
 map <leader>ff <C-p>
 " ;q 强制退出
@@ -149,3 +152,4 @@ map <leader>W :wq!<cr>
 map <leader>Q :qa!<cr>
 " ;e 保存只读文件
 map <leader>e :w !sudo tee %<cr>
+map <leader>tn :NERDTreeToggle<cr>
