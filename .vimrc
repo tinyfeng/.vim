@@ -8,6 +8,7 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'djoshea/vim-autoread'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -18,7 +19,6 @@ Plugin 'rking/ag.vim'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'scrooloose/nerdtree'
@@ -105,14 +105,19 @@ set hlsearch
 set cursorcolumn
 set cursorline
 
+" disable creating .swp file
+set noswapfile
+
 " 按下ctrl键 +j或者k，快速上下移动
 nnoremap <C-j> 5j
 nnoremap <C-k> 5k
+vnoremap <C-j> 5j
+vnoremap <C-k> 5k
 
 " 在换行的一行中上下移动
 nnoremap j gj
 nnoremap k gk
-let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_at_startup = 0
 
 " 高亮所在列
 highlight CursorColumn cterm=NONE ctermbg=yellow guibg=NONE guifg=NONE 
@@ -138,18 +143,55 @@ function SetRubyOptions()
     inoremap <buffer> _ -
 endfunction
 
+" java 设置
+autocmd Filetype java call SetJavaOptions()
+function SetJavaOptions()
+  set tabstop=4
+endfunction
+
 " ;ag 全局搜索文本
 nnoremap <leader>ag :Ag ""<Left>
 " ;ff ctrlp查找文件
 map <leader>ff <C-p>
 " ;q 强制退出
-map <leader>q :q!<cr>
+map q :q!<cr>
 " ;w 保存
 map <leader>w :w!<cr>
 " ;W 保存并退出
-map <leader>W :wq!<cr>
+map W :wq!<cr>
 " ;Q 退出全部窗口
-map <leader>Q :qa!<cr>
+map Q :qa!<cr>
 " ;e 保存只读文件
 map <leader>e :w !sudo tee %<cr>
+" ;tn 打开或关闭目录数
 map <leader>tn :NERDTreeToggle<cr>
+
+map <Leader>gb :Gblame<cr>
+
+nnoremap <f2> $
+nnoremap <f1> ^
+imap <f2> <esc>$a
+imap <f1> <esc>^i
+set autoread
+au CursorHold * checktime
+nnoremap <Leader>rl :bufdo e<cr>
+nnoremap da ciw<esc>
+nnoremap dA ciW<esc>
+nnoremap yw viwy
+imap ;5 <%  %><left><left><left>
+imap ;% <%=  %><left><left><left>
+imap ;di <div></div><esc>5<left>i
+imap <c-h> <left>
+imap <c-j> <down>
+imap <c-k> <up>
+imap <c-l> <right>
+imap <c-e> <esc>ea
+imap <c-w> <esc>wi
+imap <c-b> <esc>bi
+nnoremap ;' bi'<esc>ea'<esc>
+
+" 选中高亮
+highlight Visual cterm=bold ctermbg=Blue ctermfg=NONE
+
+
+let g:syntastic_java_javac_classpath = "/Users/yanli.hou/Library/Android/sdk/platforms/android-27/*.jar:/Users/yanli.hou/AndroidStudioProjects/yue/app/src/main/lib"
