@@ -136,11 +136,8 @@ let g:ycm_complete_in_strings = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
 
 
-" 为了ruby 编程方便,_ -相互替换
 autocmd Filetype ruby call SetRubyOptions()
 function SetRubyOptions()
-    inoremap <buffer> - _
-    inoremap <buffer> _ -
 endfunction
 
 " java 设置
@@ -154,7 +151,7 @@ nnoremap <leader>ag :Ag ""<Left>
 " ;ff ctrlp查找文件
 map <leader>ff <C-p>
 " ;q 强制退出
-map q :q!<cr>
+map q :q<cr>
 " ;w 保存
 map <leader>w :w!<cr>
 " ;W 保存并退出
@@ -194,4 +191,5 @@ nnoremap ;' bi'<esc>ea'<esc>
 highlight Visual cterm=bold ctermbg=Blue ctermfg=NONE
 
 
-let g:syntastic_java_javac_classpath = "/Users/yanli.hou/Library/Android/sdk/platforms/android-27/*.jar:/Users/yanli.hou/AndroidStudioProjects/yue/app/src/main/lib"
+"auto save
+autocmd TextChanged,TextChangedI <buffer> silent write
