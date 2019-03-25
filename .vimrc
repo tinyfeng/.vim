@@ -19,7 +19,11 @@ Plugin 'rking/ag.vim'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
+" 括号自动补全
+Plugin 'Raimondi/delimitMate'
+Plugin 'udalov/kotlin-vim'
 Plugin 'kien/ctrlp.vim'
+Plugin 'chemzqm/wxapp.vim'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kchmck/vim-coffee-script'
@@ -139,6 +143,7 @@ let g:ycm_collect_identifiers_from_comments_and_strings = 0
 
 autocmd Filetype ruby call SetRubyOptions()
 function SetRubyOptions()
+  nnoremap <Leader>sc :Ag "class <cword>" <cr><cr>
 endfunction
 
 " java 设置
@@ -194,3 +199,25 @@ highlight Visual cterm=bold ctermbg=Blue ctermfg=NONE
 
 "auto save
 autocmd TextChanged,TextChangedI <buffer> silent write
+
+:set nomodeline
+let g:ctrlp_clear_cache_on_exit = 0
+set undofile
+set undodir=~/.vim/undo/
+nnoremap <Leader>bo :browse oldfiles<cr>
+nnoremap ;sb  :%!xxd<cr>
+nnoremap ;sn  :%!xxd -r<cr>
+
+nnoremap <Leader>i :JavaImport<cr>
+nnoremap <Leader>d :JavaDocSearch -x declarations<cr>
+" ,<enter> searches context for statement
+nnoremap <Leader><cr> :JavaSearchContext<cr>
+" ,jv validates current java file
+nnoremap <Leader>jv :Validate<cr>
+" ,jc shows corrections for the current line of java
+nnoremap <Leader>jc :JavaCorrect<cr>
+nnoremap <Leader>ac :Ag "<cword>" <cr>
+
+" 'open' on OSX will open the url in the default browser without issue
+let g:EclimBrowser='open'
+let g:EclimCompletionMethod = 'omnifunc'
